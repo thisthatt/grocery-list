@@ -5,56 +5,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%= title%></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <h1>Todos</h1>
-
+    <h1>Grocery List</h1>
+    <h2>Name | Quantity</h2>
     <% for(let i = 0; i < currentCategories.length; i++) { %>
         <h3 class="<%=currentCategories[i]%>"><%=currentCategories[i]%></h3>
         <ul>
             <% for(let j = 0; j < todos.length; j++){ %>
     
                 <% if (currentCategories[i] == todos[j].category){ %>
-                   <% console.log(currentCategories[i], todos[j].category) %>
+
                     <li class='todoItem' data-id='<%=todos[j]._id%>'>
                         <span class='<%= todos[j].completed === true ? 'completed' : 'not'%>'><%= todos[j].todo %></span>
+                        <% if (todos[j].quantity){ %>
+                            <span><%=todos[j].quantity%></span>
+                            <% } %>
                         <span class='del'> Delete </span>
                     </li>
                 <% } else if(!currentCategories.includes(todos[j].category)) {%>
                     
                     <li class='todoItem' data-id='<%=todos[j]._id%>'>
                         <span class='<%= todos[j].completed === true ? 'completed' : 'not'%>'><%= todos[j].todo %></span>
-                        <span class='del'> Delete </span>
+                        <% if (todos[j].quantity){ %>
+                        <span><%=todos[j].quantity%></span>
+                        <% } %>
+                        <button type="submit" >Delete</button>
                     </li>
                     <% } %>
-                    <% } %>
-        </ul>    
-
+                <% } %>
+        </ul> 
     <% } %>
 
 
      
     <h2><%= user.userName %> has <%= left %> things left to do.</h2>
-
+  <!--Enter To Do Item-->
     <form action="/todos/createTodo" method='POST'>
         <input type="text" placeholder="Enter Todo Item" name='todoItem'>
-
-
+        <input type="number" name="quantity">
             <label for="category">Category:</label>
             <select name="category" id="category">
                 <option value="other">Other</option>
                 <% allCategories.forEach(cate => { %>
-<option value="<%=cate.category%>"><%=cate.category%></option>
+                <option value="<%=cate.category%>"><%=cate.category%></option>
     
                 <% }) %>
             </select>
-
-
         <button type="submit">Submit</button>
     </form>
+
+    <!--Enter A Category-->
     <form action="/todos/createCategory" method='POST'>
         <input type="text" placeholder="Enter a Category" name='categoryName'>
         <button type="submit">Submit</button>

@@ -12,7 +12,7 @@ const todoRoutes = require('./routes/todos')
 
 require('dotenv').config({path: './config/.env'})
 
-// Passport config
+// Passport configs
 require('./config/passport')(passport)
 
 connectDB()
