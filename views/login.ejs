@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%= title%></title>
 </head>
 <body>
     <% if (locals.messages.errors) { %>
@@ -24,3 +24,35 @@
     </form>
 </body>
 </html>
+
+
+<!--start of the code snippet--->
+
+<!--how it would look like -->
+<!--The Name of the Category ABC
+Item List Banana: []
+Got It-->
+
+<!--name of category for food items-->
+<p>The Name of Category ABC</p>
+
+<!--label here what food item(s) to put on the list-->
+<label for="myCheck">Item List Banana:</label> 
+<input type="checkbox" id="myCheck" onclick="myFunction()">
+
+<!--Message to say when a person has gotten the food item(s) and put the item in their cart-->
+<p id="text" style="display:none">Got It</p>
+
+<!--script for the checkbox to make an actual mark when you click on the box-->
+<script>
+function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+</script>
+<!--end of the code snippet-->

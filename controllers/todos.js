@@ -16,14 +16,14 @@ module.exports = {
                     currentCategories.push(item.category)
                 }
             })
-            res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user, currentCategories: currentCategories, allCategories: categories})
+               res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user, currentCategories: currentCategories, allCategories: categories,title:'Grocery List'})
         }catch(err){
             console.log(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, category: req.body.category})
+            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, category: req.body.category,quantity: req.body.quantity})
             console.log('Todo has been added!')
             res.redirect('/todos')
         }catch(err){

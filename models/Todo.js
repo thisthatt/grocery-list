@@ -11,10 +11,13 @@ const TodoSchema = new mongoose.Schema({
   },
   userId: {
     type: String,
-    required: true
+    required: true,
   },
   category: {
     type: String,
+  },
+  quantity: {
+    type: Number,
   }
 })
 

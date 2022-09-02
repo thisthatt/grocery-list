@@ -41,4 +41,18 @@ bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mon
  
  Have fun testing and improving it! 😎
 
+-----------
+
+
+Grocery-App
+ - Features:
+    - Add item
+    - Edit item
+    - Display item
+      - Name
+      - Quantity
+    - Categorize item
+    - Delete item
+    - Mark item
+    - Unmark item
 
