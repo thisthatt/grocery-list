@@ -16,6 +16,7 @@
                 <li class='todoItem' data-id='<%=el._id%>'>
                     <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
                     <span><%= el.quantity%></span>
+                    <span class='edit'> <a href="todos/edit/<%=el._id%>">Edit</a> </span>
                     <span class='del'> Delete </span>
                 </li>
         <%})%>  
