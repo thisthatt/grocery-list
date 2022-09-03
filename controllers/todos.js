@@ -7,14 +7,23 @@ module.exports = {
         try{
             const todoItems = await Todo.find({userId:req.user.id})
             const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
-            res.render('todos.ejs', {title:'Homepage',todos: todoItems, left: itemsLeft, user: req.user})
+            const category = await Category.find();
+            if(!category.length){
+                const defaultOption = ['Produce','Dairy','Frozen','Deli'];
+                defaultOption.forEach(async (item) => {
+                    await Category.create({category:item});
+                });
+                res.redirect('/todos');
+            }
+            res.render('todos.ejs', {title:'Homepage',todos: todoItems, left: itemsLeft, user: req.user,category});
         }catch(err){
             console.log(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, quantity: req.body.quantity})
+            const category = await Category.find({category:req.body.category})
+            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, quantity: req.body.quantity,categoryId:category[0]._id})
             console.log('Todo has been added!')
             res.redirect('/todos')
         }catch(err){

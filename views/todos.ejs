@@ -12,14 +12,20 @@
 <body>
     <h1>Todos</h1>
     <ul>
-        <% todos.forEach( el => { %>
-                <li class='todoItem' data-id='<%=el._id%>'>
-                    <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                    <span><%= el.quantity%></span>
-                    <span class='edit'> <a href="todos/edit/<%=el._id%>">Edit</a> </span>
-                    <span class='del'> Delete </span>
-                </li>
-        <%})%>  
+        <%category.forEach(item => {%>
+            <li><h2><%=item.category%></h2></li>
+            <% todos.forEach( el => { %>
+                <%if(el.categoryId == item._id){%>
+                    <li class='todoItem' data-id='<%=el._id%>'>
+                        <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                        <span><%= el.quantity%></span>
+                        <span class='edit'> <a href="todos/edit/<%=el._id%>">Edit</a> </span>
+                        <span class='del'> Delete </span>
+                    </li>
+                <%}%>
+            <%})%>  
+        <%})%>
+
     </ul>
 
     <h2><%= user.userName %> has <%= left %> item to pick up.</h2>
@@ -27,6 +33,12 @@
     <form action="/todos/createTodo" method='POST' id="subForm">
         <input type="text" placeholder="Enter Todo Item" name='todoItem' required>
         <input type="number" placeholder="qty" name='quantity' min="0">
+        <select name="category" id="categoryForm" required>
+            <option value="">None</option>
+            <%category.forEach(el=>{%>
+                <option value="<%=el.category%>"><%=el.category%></option>
+            <%})%>
+        </select>
         <button type="submit">Add</button>
         <button type="reset" id="resetBtn" >Reset</button>
     </form>
