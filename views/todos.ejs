@@ -10,58 +10,38 @@
 </head>
 
 <body>
-    <h1>Grocery List</h1>
-    <h2>Name | Quantity</h2>
-    <% for(let i = 0; i < currentCategories.length; i++) { %>
-        <h3 class="<%=currentCategories[i]%>"><%=currentCategories[i]%></h3>
-        <ul>
-            <% for(let j = 0; j < todos.length; j++){ %>
-    
-                <% if (currentCategories[i] == todos[j].category){ %>
-
-                    <li class='todoItem' data-id='<%=todos[j]._id%>'>
-                        <span class='<%= todos[j].completed === true ? 'completed' : 'not'%>'><%= todos[j].todo %></span>
-                        <% if (todos[j].quantity){ %>
-                            <span><%=todos[j].quantity%></span>
-                            <% } %>
+    <h1>Todos</h1>
+    <ul>
+        <%category.forEach(item => {%>
+            <%if(item.display){%>
+                <li class="categoryName"><h2><%=item.category%></h2></li>
+            <%}%>
+            <% todos.forEach( el => { %>
+                <%if(el.categoryId == item._id){%>
+                    <li class='todoItem' data-id='<%=el._id%>'>
+                        <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                        <span><%= el.quantity%></span>
+                        <span class='edit'> <a href="todos/edit/<%=el._id%>">Edit</a> </span>
                         <span class='del'> Delete </span>
                     </li>
-                <% } else if(!currentCategories.includes(todos[j].category)) {%>
-                    
-                    <li class='todoItem' data-id='<%=todos[j]._id%>'>
-                        <span class='<%= todos[j].completed === true ? 'completed' : 'not'%>'><%= todos[j].todo %></span>
-                        <% if (todos[j].quantity){ %>
-                        <span><%=todos[j].quantity%></span>
-                        <% } %>
-                        <button type="submit" >Delete</button>
-                    </li>
-                    <% } %>
-                <% } %>
-        </ul> 
-    <% } %>
+                <%}%>
+            <%})%>  
+        <%})%>
 
+    </ul>
 
-     
-    <h2><%= user.userName %> has <%= left %> things left to do.</h2>
-  <!--Enter To Do Item-->
-    <form action="/todos/createTodo" method='POST'>
-        <input type="text" placeholder="Enter Todo Item" name='todoItem'>
-        <input type="number" name="quantity">
-            <label for="category">Category:</label>
-            <select name="category" id="category">
-                <option value="other">Other</option>
-                <% allCategories.forEach(cate => { %>
-                <option value="<%=cate.category%>"><%=cate.category%></option>
-    
-                <% }) %>
-            </select>
-        <button type="submit">Submit</button>
-    </form>
-
-    <!--Enter A Category-->
-    <form action="/todos/createCategory" method='POST'>
-        <input type="text" placeholder="Enter a Category" name='categoryName'>
-        <button type="submit">Submit</button>
+    <h2><%= user.userName %> has <%= left %> item to pick up.</h2>
+    <form action="/todos/createTodo" method='POST' id="subForm">
+        <input type="text" placeholder="Enter Todo Item" name='todoItem' required>
+        <input type="number" placeholder="qty" name='quantity' min="0">
+        <select name="category" id="categoryForm" required>
+            <option value="">None</option>
+            <%category.forEach(el=>{%>
+                <option value="<%=el.category%>"><%=el.category%></option>
+            <%})%>
+        </select>
+        <button type="submit">Add</button>
+        <button type="reset" id="resetBtn" >Reset</button>
     </form>
 
     <a href="/logout">Logout</a>

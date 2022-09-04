@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<body>
+        <h1>Edit Item:</h1>
+        <form action="/todos/edit/<%= item[0]._id%>" method='POST'>
+            <input type="text" name='groceryItem' value="<%=item[0].todo%>" required>
+            <input type="number" placeholder="qty" name='quantity' min="0" value="<%=item[0].quantity%>">
+            <select name="category" id="categoryForm">
+                <%category.forEach(el => {%>
+                    <option value="<%=el.category%>" <%= el._id == item[0].categoryId ? 'selected' : ''%> ><%=el.category%></option>
+                <%})%>
+            </select>
+            <button type="submit">Update</button>
+            <button type="button"><a href="/todos">Cancel</a></button>
+        </form>
+</body>
+</html>
