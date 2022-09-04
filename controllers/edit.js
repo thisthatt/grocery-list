@@ -13,11 +13,13 @@ module.exports = {
     },
     updateItem: async (req,res) => {
         try{
-            const category = await Category.find({category:req.body.category});
+            const category = await Category.findOneAndUpdate({category:req.body.category},{
+                display:true
+            });
             await Todo.findOneAndUpdate({_id:req.params.id},{
                 todo: req.body.groceryItem,
                 quantity: req.body.quantity,
-                categoryId: category[0]._id
+                categoryId: category._id
             })
             res.redirect('/todos');
         }catch(error){

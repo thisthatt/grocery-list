@@ -11,7 +11,7 @@ module.exports = {
             if(!category.length){
                 const defaultOption = ['Produce','Dairy','Frozen','Deli'];
                 defaultOption.forEach(async (item) => {
-                    await Category.create({category:item});
+                    await Category.create({category:item,display:false});
                 });
                 res.redirect('/todos');
             }
@@ -22,8 +22,10 @@ module.exports = {
     },
     createTodo: async (req, res)=>{
         try{
-            const category = await Category.find({category:req.body.category})
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, quantity: req.body.quantity,categoryId:category[0]._id})
+            const category = await Category.findOneAndUpdate({category:req.body.category},{
+                display:true
+            });
+            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, quantity: req.body.quantity,categoryId:category._id})
             console.log('Todo has been added!')
             res.redirect('/todos')
         }catch(err){
@@ -69,6 +71,15 @@ module.exports = {
             res.json('Deleted It')
         }catch(err){
             console.log(err)
+        }
+    },
+    deleteCategory: async (req,res) => {
+        try{
+            await Category.findOneAndDelete({category:req.body.categoryFromJSFile});
+            console.log('Deleted Category')
+            res.json('Deleted It')
+        }catch(error){
+            console.error(error);
         }
     }
 }    

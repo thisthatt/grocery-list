@@ -13,7 +13,9 @@
     <h1>Todos</h1>
     <ul>
         <%category.forEach(item => {%>
-            <li><h2><%=item.category%></h2></li>
+            <%if(item.display){%>
+                <li class="categoryName"><h2><%=item.category%></h2></li>
+            <%}%>
             <% todos.forEach( el => { %>
                 <%if(el.categoryId == item._id){%>
                     <li class='todoItem' data-id='<%=el._id%>'>
