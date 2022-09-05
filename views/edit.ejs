@@ -12,8 +12,8 @@
             <input type="text" name='groceryItem' value="<%=item[0].todo%>" required>
             <input type="number" placeholder="qty" name='quantity' min="0" value="<%=item[0].quantity%>">
             <select name="category" id="categoryForm">
-                <%category.forEach(el => {%>
-                    <option value="<%=el.category%>" <%= el._id == item[0].categoryId ? 'selected' : ''%> ><%=el.category%></option>
+                <%newCategory.forEach(el => {%>
+                    <option value="<%=el%>" <%= el === item[0].category ? 'selected' : ''%> ><%=el%></option>
                 <%})%>
             </select>
             <button type="submit">Update</button>
