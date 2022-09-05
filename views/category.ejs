@@ -9,10 +9,10 @@
 <body>
     <h1>Edit Category:</h1>
     <h2>Current Category:</h2>
-    <%if(category){%>
+    <%if(newCategory){%>
         <select name="" id="">
-            <%category.forEach(el => {%>
-                <option value="<%=el.category%>"><%=el.category%></option>
+            <%newCategory.forEach(el => {%>
+                <option value="<%=el%>"><%=el%></option>
             <%})%>
         </select>
     <%}%>
@@ -25,8 +25,8 @@
     <h2>Delete Category:</h2>
     <form action="/todos/category/deleteCategory" method="post">
         <select name="category" id="" required>
-            <%category.forEach(el => {%>
-                <option value="<%=el.category%>"><%=el.category%></option>
+            <%filteredCategory.forEach(el => {%>
+                <option value="<%=el%>"><%=el%></option>
             <%})%>
         </select>
         <button type="submit">Delete</button>

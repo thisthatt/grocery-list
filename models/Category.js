@@ -5,9 +5,14 @@ const CategorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userId:{
+    type:String,
+    required:true
+  },
   display:{
-    type: Boolean,
-    required: true
+    type:Boolean,
+    default:false,
+    required:true
   }
 })
 

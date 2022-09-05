@@ -7,13 +7,21 @@ const Category = require('../models/Category');
  */
 module.exports = {
     getCategory: async (req,res) => {
-        const category = await Category.find().sort({_id:-1});
-        res.render('category',{title:'Add Category',category});
+        const defaultOption = ['PRODUCE','DAIRY','FROZEN','DELI','OTHER'];
+        const category = await Category.find({userId:req.user._id}).sort({_id:-1});
+        const filteredCategory = [];
+        category.forEach(item => {
+            if(!defaultOption.includes(item.category)){
+                filteredCategory.push(item.category);
+            }
+        });
+        const newCategory = [...filteredCategory,...defaultOption];
+        res.render('category',{title:'Add Category',newCategory,filteredCategory});
     },
     createCategory:async (req,res) => {
-        const exist = await Category.find({category:req.body.categoryName.toUpperCase()});
+        const exist = await Category.find({category:req.body.categoryName.toUpperCase(),userId:req.user._id});
         if(!exist.length){
-            await Category.create({category:req.body.categoryName.toUpperCase(),display:false});
+            await Category.create({category:req.body.categoryName.toUpperCase(),userId:req.user._id});
             res.redirect('/todos/category');
         }else{
             res.redirect('/todos/category');

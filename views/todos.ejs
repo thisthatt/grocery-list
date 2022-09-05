@@ -17,7 +17,7 @@
                 <li class="categoryName"><h2><%=item.category%></h2></li>
             <%}%>
             <% todos.forEach( el => { %>
-                <%if(el.categoryId == item._id){%>
+                <%if(el.category === item.category){%>
                     <li class='todoItem' data-id='<%=el._id%>'>
                         <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
                         <span><%= el.quantity%></span>
@@ -35,9 +35,14 @@
         <button type="button"><a href="todos/category">Add/Delete Category</a></button>
         <select name="category" id="categoryForm" required>
             <option value="">Select Category</option>
-            <%category.forEach(el=>{%>
+            <%newCategory.forEach(el=>{%>
                 <option value="<%=el.category%>"><%=el.category%></option>
             <%})%>
+            <option value="PRODUCE">PRODUCE</option>
+            <option value="DAIRY">DAIRY</option>
+            <option value="DELI">DELI</option>
+            <option value="FROZEN">FROZEN</option>
+            <option value="OTHER">OTHER</option>
         </select>
         <input type="text" placeholder="Enter Todo Item" name='todoItem' required>
         <input type="number" placeholder="qty" name='quantity' min="0">
