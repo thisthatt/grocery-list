@@ -81,8 +81,8 @@ async function deleteHeader(){
     const categoryName = this.innerText;
     try{
         if(this.nextElementSibling === null || this.nextElementSibling.getAttribute('class') !== 'todoItem'){
-            const response = await fetch('todos/deleteCategory', {
-                method: 'delete',
+            const response = await fetch('todos/deleteHeader', {
+                method: 'put',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({
                     'categoryFromJSFile': categoryName
