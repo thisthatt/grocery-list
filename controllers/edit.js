@@ -1,5 +1,11 @@
+//Import Models
 const Todo = require('../models/Todo');
 const Category = require('../models/Category');
+
+/**
+ * editItem - Render edit page to edit list item
+ * updateItem - Update the list 
+*/
 module.exports = {
     editItem: async (req,res) => {
         try{

@@ -9,8 +9,6 @@ router.get('/', ensureAuth, todosController.getTodos)
 
 router.post('/createTodo', todosController.createTodo)
 
-router.post('/createCategory', todosController.createCategory)
-
 router.put('/markComplete', todosController.markComplete)
 
 router.put('/markIncomplete', todosController.markIncomplete)
