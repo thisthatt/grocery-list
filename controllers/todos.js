@@ -9,7 +9,7 @@ module.exports = {
             const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
             const category = await Category.find();
             if(!category.length){
-                const defaultOption = ['Produce','Dairy','Frozen','Deli'];
+                const defaultOption = ['Produce','Dairy','Frozen','Deli','Other'];
                 defaultOption.forEach(async (item) => {
                     await Category.create({category:item,display:false});
                 });
@@ -75,9 +75,18 @@ module.exports = {
     },
     deleteCategory: async (req,res) => {
         try{
-            await Category.findOneAndDelete({category:req.body.categoryFromJSFile});
-            console.log('Deleted Category')
-            res.json('Deleted It')
+            const defaultOption = ['Produce','Dairy','Frozen','Deli','Other'];
+            if(defaultOption.includes(req.body.categoryFromJSFile)){
+                await Category.findOneAndUpdate({category:req.body.categoryFromJSFile},{
+                    display:false
+                });
+                console.log('Deleted Category')
+                res.json('Deleted It')
+            }else{
+                await Category.findOneAndDelete({category:req.body.categoryFromJSFile});
+                console.log('Deleted Category')
+                res.json('Deleted It')
+            }
         }catch(error){
             console.error(error);
         }

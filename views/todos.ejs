@@ -32,14 +32,15 @@
 
     <h2><%= user.userName %> has <%= left %> item to pick up.</h2>
     <form action="/todos/createTodo" method='POST' id="subForm">
-        <input type="text" placeholder="Enter Todo Item" name='todoItem' required>
-        <input type="number" placeholder="qty" name='quantity' min="0">
+        <button type="button"><a href="todos/category">Add/Delete Category</a></button>
         <select name="category" id="categoryForm" required>
-            <option value="">None</option>
+            <option value="">Select Category</option>
             <%category.forEach(el=>{%>
                 <option value="<%=el.category%>"><%=el.category%></option>
             <%})%>
         </select>
+        <input type="text" placeholder="Enter Todo Item" name='todoItem' required>
+        <input type="number" placeholder="qty" name='quantity' min="0">
         <button type="submit">Add</button>
         <button type="reset" id="resetBtn" >Reset</button>
     </form>
