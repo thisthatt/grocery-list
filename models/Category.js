@@ -5,8 +5,8 @@ const CategorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userId: {
-    type: String,
+  display:{
+    type: Boolean,
     required: true
   }
 })

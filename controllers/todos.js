@@ -1,39 +1,40 @@
 const Todo = require('../models/Todo')
 const Category = require('../models/Category')
+/**
+ * getTodos - Render the todo page
+ * createTodo - Create an item
+ * markComplete - Mark an item as complete
+ * markIncomplete - Mark an item as incomplete
+ * deleteTodo - Delete an item 
+ * deleteCategory - Delete a category
+ */
 
 module.exports = {
     getTodos: async (req,res)=>{
-        console.log(req.user)
         try{
             const todoItems = await Todo.find({userId:req.user.id})
-            const categories = await Category.find({userId:req.user.id})
             const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
-
-            let currentCategories = [];
-            todoItems.forEach(item => {
-
-                if(!currentCategories.includes(item.category)){
-                    currentCategories.push(item.category)
-                }
-            })
-               res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user, currentCategories: currentCategories, allCategories: categories,title:'Grocery List'})
+            const category = await Category.find().sort({_id:-1});
+            if(!category.length){
+                const defaultOption = ['PRODUCE','DAIRY','DELI','FROZEN','OTHER'].reverse();
+                defaultOption.forEach(async (item) => {
+                    await Category.create({category:item,display:false});
+                });
+                res.redirect('/todos');
+            }else{
+                res.render('todos.ejs', {title:'Homepage',todos: todoItems, left: itemsLeft, user: req.user,category});
+            }
         }catch(err){
             console.log(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, category: req.body.category,quantity: req.body.quantity})
+            const category = await Category.findOneAndUpdate({category:req.body.category},{
+                display:true
+            });
+            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, quantity: req.body.quantity,categoryId:category._id})
             console.log('Todo has been added!')
-            res.redirect('/todos')
-        }catch(err){
-            console.log(err)
-        }
-    },
-    createCategory: async (req, res)=>{
-        try{
-            await Category.create({category: req.body.categoryName, userId: req.user.id})
-            console.log('category has been added!')
             res.redirect('/todos')
         }catch(err){
             console.log(err)
@@ -69,6 +70,24 @@ module.exports = {
             res.json('Deleted It')
         }catch(err){
             console.log(err)
+        }
+    },
+    deleteCategory: async (req,res) => {
+        try{
+            const defaultOption = ['PRODUCE','DAIRY','FROZEN','DELI','OTHER'];
+            if(defaultOption.includes(req.body.categoryFromJSFile.toUpperCase())){
+                await Category.findOneAndUpdate({category:req.body.categoryFromJSFile.toUpperCase()},{
+                    display:false
+                });
+                console.log('Deleted Category')
+                res.json('Deleted It')
+            }else{
+                await Category.findOneAndDelete({category:req.body.categoryFromJSFile.toUpperCase()});
+                console.log('Deleted Category')
+                res.json('Deleted It')
+            }
+        }catch(error){
+            console.error(error);
         }
     }
 }    
