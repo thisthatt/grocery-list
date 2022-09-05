@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const editRoute = require('./edit');
+const categoryRoute = require('./category');
 const todosController = require('../controllers/todos') 
 const { ensureAuth } = require('../middleware/auth')
 
@@ -18,6 +19,9 @@ router.delete('/deleteTodo', todosController.deleteTodo)
 
 router.delete('/deleteCategory', todosController.deleteCategory)
 
-router.use('/edit',editRoute)
+router.use('/edit',editRoute);
+
+router.use('/category',categoryRoute);
+
 
 module.exports = router

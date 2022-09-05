@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<body>
+    <h1>Edit Category:</h1>
+    <h2>Current Category:</h2>
+    <%if(category){%>
+        <select name="" id="">
+            <%category.forEach(el => {%>
+                <option value="<%=el.category%>"><%=el.category%></option>
+            <%})%>
+        </select>
+    <%}%>
+    <h2>Add Category:</h2>
+    <form action="/todos/category" method="post">
+        <input type="text" name="categoryName" placeholder="Enter Category Name" required>
+        <button type="submit">Add</button>
+        <button type="reset">Reset</button>
+    </form>
+    <h2>Delete Category:</h2>
+    <form action="/todos/category/deleteCategory" method="post">
+        <select name="category" id="" required>
+            <%category.forEach(el => {%>
+                <option value="<%=el.category%>"><%=el.category%></option>
+            <%})%>
+        </select>
+        <button type="submit">Delete</button>
+    </form>
+    <a href="/todos">Back to List</a>
+</body>
+</html>

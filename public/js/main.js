@@ -3,6 +3,8 @@ const todoItem = document.querySelectorAll('span.not')
 const todoComplete = document.querySelectorAll('span.completed')
 const categoryHeader = document.querySelectorAll('.categoryName');
 
+
+
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
 })
@@ -18,6 +20,8 @@ Array.from(todoComplete).forEach((el)=>{
 Array.from(categoryHeader).forEach((el)=>{
     el.addEventListener('click', deleteHeader)
 })
+
+
 
 async function deleteTodo(){
     const todoId = this.parentNode.dataset.id
