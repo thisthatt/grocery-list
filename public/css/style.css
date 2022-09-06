@@ -1,21 +1,97 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+body{
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 h1{
-    color: red;
     font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+}
+
+h2{
+    font-size: 1.6rem;
+    padding-top: 60px;
 }
 .completed{
     text-decoration: line-through;
     color: gray;
 }
-.not{
-    text-decoration: underline;
-}
+
 
 .alert alert-danger {
     color: red;
     }
 
 
-/*comments*/
-/*made .alert alert-danger in red color text*/
-/*added font-weight: bold; for h1*/
+.btn-primary a{
+    color: white;
+    text-decoration: none;
+}
+
+.categoryName{
+    text-decoration: underline;
+    font-size: 2rem;
+    padding-bottom: 15px;
+}
+li {
+    list-style: none;
+    font-size: 1.3rem;
+}
+
+a, li a{
+    text-decoration: none;
+}
+
+form, option{
+    font-size: 1.3rem;
+}
+
+form{
+    border: 3px solid #0d6efd;
+    border-radius: 10px;
+    padding: 50px 30px 40px 30px;
+}
+
+.container{
+    padding-top: 50px;
+}
+
+.categoryForm, .groceryForm{
+    display: flex;
+    gap: 30px;
+    padding-bottom: 20px;
+}
+
+.categoryForm > button {
+    width: 300px;
+}
+
+.editPage a {
+    font-size: 1.3rem;
+}
+
 
