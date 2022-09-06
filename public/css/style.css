@@ -46,9 +46,6 @@ h2{
     color: red;
     }
 
-    /* .signupForm{
-        width: 600px;
-    } */
 
 .btn-primary a{
     color: white;
@@ -93,9 +90,8 @@ form{
     width: 300px;
 }
 
+.editPage a {
+    font-size: 1.3rem;
+}
 
-
-/*comments*/
-/*made .alert alert-danger in red color text*/
-/*added font-weight: bold; for h1*/
 
