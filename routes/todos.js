@@ -15,7 +15,7 @@ router.put('/markIncomplete', todosController.markIncomplete)
 
 router.delete('/deleteTodo', todosController.deleteTodo)
 
-router.delete('/deleteCategory', todosController.deleteCategory)
+router.put('/deleteHeader', todosController.deleteCategory)
 
 router.use('/edit',editRoute);
 

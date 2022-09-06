@@ -77,10 +77,11 @@ module.exports = {
     },
     deleteCategory: async (req,res) => {
         try{
-            await Category.findOneAndDelete({category:req.body.categoryFromJSFile,userId:req.user._id});
+            await Category.findOneAndUpdate({category:req.body.categoryFromJSFile,userId:req.user._id},{
+                display:false
+            });
             console.log('Deleted Category')
             res.json('Deleted It')
-
         }catch(error){
             console.error(error);
         }
