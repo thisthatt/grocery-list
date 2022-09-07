@@ -14,9 +14,14 @@ A Simple ToDo App is built using the MVC Architecture, we have also implemented 
 
 ---
 
-# Who is this for? 
+# Team Member (Discord)
 
-- It's for beginners & intermediates with little more experience, to help understand the various aspects of building a node app with some complex features
+- blankybleepbloop#3335
+- gilbert#3002
+- Jennifer#2144
+- jindacz#8511
+- lewpoly#4087
+- Megatron#4213
 
 ---
 
