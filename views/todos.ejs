@@ -30,19 +30,28 @@
 
     <h1><%= user.userName %>'s grocery list</h1>
     <section class="container">
-        <ul>
+        <ul class="list-group list-group">
             <%category.forEach(item => {%>
                 <%if(item.display){%>
-                    <li class="categoryName"><h2><%=item.category%></h2></li>
+                    <li class="categoryName "><h2 class="text-primary text-center border-top"><%=item.category%></h2></li>
                 <%}%>
                 <% todos.forEach( el => { %>
                     <%if(el.category === item.category){%>
-                        <li class='todoItem' data-id='<%=el._id%>'>
-                            <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                            <span><%= el.quantity%></span>
-                            <button class='edit btn btn-primary btn-sm'> <a href="todos/edit/<%=el._id%>">Edit</a> </button>
-                            <button class='del btn btn-primary btn-sm'> Delete </button>
-                        </li>
+                        <li class='todoItem  border-top' data-id='<%=el._id%>'>
+                            <div class="d-flex flex-row align-items-center my-1"> 
+                                <div class="bg-secondary p-2 text-dark d-flex flex-column" style="--bs-bg-opacity: .2;">
+
+                                    
+                                    <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                                    <span class="fs-6 ">Quantity: <%= el.quantity%></span>
+                                </div>
+                                <div class="ms-auto">
+                                    
+                                    <button class='edit btn btn-success btn-sm '> <a class="text-light" href="todos/edit/<%=el._id%>">Edit</a> </button>
+                                    <button class='del btn btn-warning btn-sm'> Delete </button>
+                                </div>
+                            </div>
+                            </li>
                     <%}%>
                 <%})%>  
             <%})%>
